@@ -1,0 +1,321 @@
+{
+	"info": {
+		"_postman_id": "5b43d502-18ad-46a4-b96e-5542512c6c46",
+		"name": "JwtAuthenticationProject",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "43035848"
+	},
+	"item": [
+		{
+			"name": "UserNotAuthenticated",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/home/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"home",
+						"users"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "NotAuthenticatedResponse",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/home/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"home",
+								"users"
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Length",
+							"value": "74"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 31 Mar 2025 06:05:10 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "Access Denied !! Full authentication is required to access this resource\r\n"
+				}
+			]
+		},
+		{
+			"name": "UserAuthenticated",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"Vishal@gmail.com\",\r\n    \"password\":\"123465\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "AuthenticatedResponse",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"Vishal@gmail.com\",\r\n    \"password\":\"123465\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 31 Mar 2025 06:34:46 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"jwtToken\": \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJWaXNoYWxAZ21haWwuY29tIiwiaWF0IjoxNzQzNDAyODg2LCJleHAiOjE3NDM0MjA4ODZ9.ut-HrVwi_AC6WYTWB-f0RupptyTTAxB3zjdAz6psO9MOlu57s3nfRCEdzmQ25bbQlEjT9QeUpxHPH5jQEfj3CQ\",\n    \"username\": \"Vishal@gmail.com\"\n}"
+				}
+			]
+		},
+		{
+			"name": "APIAccessThroughJwtToken",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJWaXNoYWxAZ21haWwuY29tIiwiaWF0IjoxNzQzNDAyNjg2LCJleHAiOjE3NDM0MjA2ODZ9.jHvV9d0EnjkoUTcPissX2bXawUAGIDHohOFBqiVvGGU3xuVrG-AyFKaUxM1xGNkQRII7VE1KnfbO2WeIKqG4TA",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8081/home/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"home",
+						"users"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "AuthenticatedAPIResponse",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJWaXNoYWxAZ21haWwuY29tIiwiaWF0IjoxNzQzNDAyODg2LCJleHAiOjE3NDM0MjA4ODZ9.ut-HrVwi_AC6WYTWB-f0RupptyTTAxB3zjdAz6psO9MOlu57s3nfRCEdzmQ25bbQlEjT9QeUpxHPH5jQEfj3CQ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8081/home/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"home",
+								"users"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 31 Mar 2025 06:35:48 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"userId\": \"e096eb00-1780-45d8-ad9d-7ecd70397bec\",\n        \"name\": \"John\",\n        \"email\": \"john@doe.com\"\n    },\n    {\n        \"userId\": \"e39cdafb-268c-4dbb-aee1-b5bfb5b9048c\",\n        \"name\": \"Mark\",\n        \"email\": \"mark@rem.com\"\n    },\n    {\n        \"userId\": \"896d9eec-559f-44cb-83af-bf1b27b07ad7\",\n        \"name\": \"Julius\",\n        \"email\": \"julius@cay.com\"\n    },\n    {\n        \"userId\": \"d3816c74-19e4-4245-b084-bc676c532085\",\n        \"name\": \"Garry\",\n        \"email\": \"gary@dus.com\"\n    }\n]"
+				}
+			]
+		}
+	]
+}
